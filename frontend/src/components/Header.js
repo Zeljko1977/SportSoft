@@ -27,6 +27,19 @@ const Header = () => {
           </Nav>
 
           <Nav>
+            <NavDropdown title='Admin' id='ugovori'>
+              <NavDropdown.Item style={{ backgroundColor: '#78c2ad' }}>
+                <LinkContainer to='admin/trainers'>
+                  <Nav.Link> Treneri</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='admin/players'>
+                  <Nav.Link> Igraci</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='admin/teams'>
+                  <Nav.Link> Timovi</Nav.Link>
+                </LinkContainer>
+              </NavDropdown.Item>
+            </NavDropdown>
             <NavDropdown title='Reports' id='ugovori'>
               <NavDropdown.Item style={{ backgroundColor: '#78c2ad' }}>
                 <LinkContainer to='/reports'>

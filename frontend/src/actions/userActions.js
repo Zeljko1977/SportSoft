@@ -85,34 +85,39 @@ export const registerUs = (name, email, password) => async (dispatch) => {
   }
 }
 
-export const getAllUsers = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: GET_ALL_USERS_REQUEST,
-    })
+export const getAllUsers =
+  (uloga, idVlasnik = 0) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: GET_ALL_USERS_REQUEST,
+      })
 
-    const {
-      userLogin: { userInfo },
-    } = getState()
+      const {
+        userLogin: { userInfo },
+      } = getState()
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      const { data } = await axios.get(
+        `/api/users/svikorisnici?uloga=${uloga}&idVlasnik=${idVlasnik}`,
+        config
+      )
+
+      dispatch({
+        type: GET_ALL_USERS_SUCCESS,
+        payload: data,
+      })
+    } catch (err) {
+      dispatch({
+        type: GET_ALL_USERS_FAIL,
+        payload: err,
+      })
     }
-    const { data } = await axios.get('/api/users/svikorisnici', config)
-
-    dispatch({
-      type: GET_ALL_USERS_SUCCESS,
-      payload: data,
-    })
-  } catch (err) {
-    dispatch({
-      type: GET_ALL_USERS_FAIL,
-      payload: err,
-    })
   }
-}
 
 export const getSingleUser = (id) => async (dispatch, getState) => {
   try {

@@ -9,6 +9,11 @@ import ReportsScreen from './screens/ReportsScreen'
 import PlayerStatScreen from './screens/PlayerStatScreen'
 import TeamStatScreen from './screens/TeamStatScreen'
 import TwoPlayersStatScreen from './screens/TwoPlayersStatScreen'
+import TrainersScreen from './screens/admin/TrainersScreen'
+import TrainerScreen from './screens/admin/TrainerScreen'
+import PlayersScreen from './screens/admin/PlayersScreen'
+import TeamsScreen from './screens/admin/TeamsScreen'
+import TeamScreen from './screens/admin/TeamScreen'
 
 import Header from './components/Header'
 
@@ -18,6 +23,11 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path='/admin/teams' element={<TeamsScreen />} />
+          <Route path='/admin/team/:klubId' element={<TeamScreen />} />
+          <Route path='/admin/trainers' element={<TrainersScreen />} />
+          <Route path='/admin/trainer/:trainerId' element={<TrainerScreen />} />
+          <Route exact path='/admin/players' element={<PlayersScreen />} />
           <Route path='/loaddata' element={<LoadDataScreen />} />
           <Route path='/register' element={<RegisterScreen />} />
           <Route path='/login' element={<LoginScreen />} />

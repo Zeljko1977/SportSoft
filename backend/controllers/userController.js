@@ -69,9 +69,21 @@ const userLogin = (req, res) => {
 }
 
 const getAllUsers = (req, res) => {
+  console.log(req.query.uloga)
+  const uloga = req.query.uloga
+  const idVlasnik = req.query.idVlasnik
+  console.log(idVlasnik)
+  const tabela = uloga == 'igrac' ? 'trener_igrac' : 'klub_trener'
+  const kolona = uloga == 'igrac' ? 'TrenerId' : 'KlubId'
+  const selKolona = uloga == 'igrac' ? 'IgracId' : 'TrenerId'
   const { name, email } = req
-
-  const query = `SELECT * FROM user`
+  let query
+  if (idVlasnik != 0) {
+    query = `SELECT * FROM user WHERE id IN (SELECT ${selKolona} FROM ${tabela} WHERE ${kolona} = '${idVlasnik}')`
+  } else {
+    query = `SELECT * FROM user WHERE uloga = '${uloga}'`
+  }
+  console.log(query)
 
   db.getConnection((error, connection) => {
     if (error) {
